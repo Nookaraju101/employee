@@ -1,0 +1,11 @@
+export const FETCH_ITEMS = "FETCH_ITEMS";
+export const REGDATA = "REGDATA";
+export const FORGOT_PWD_OTP = "FORGOT_PWD_OTP";
+export const FORGOT_PWD_EMAIL = "FORGOT_PWD_EMAIL";
+export const LOGIN_ERR = "LOGIN_ERR";
+export const LOADER = "LOADER";
+export const ALERT_VAR = "ALERT_VAR";
+export const CLEAR_DATA = "CLEAR_DATA";
+export const EMPDATA = "EMPDATA ";
+export const CLEAR_USER_DATA = "CLEAR_USER_DATA ";
+export const UPDATEDATA = "UPDATEDATA";
