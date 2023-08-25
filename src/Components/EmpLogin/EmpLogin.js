@@ -1,18 +1,39 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import './EmpLogin.scss';
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import validate, { async } from "validate.js";
-import { useDispatch } from "react-redux";
-import  {AddAction, LoginDetails} from "../../Actions/LoginAction";
+import { useDispatch, useSelector } from "react-redux";
+import { LoginDetails } from "../../Actions/LoginAction";
 import { is_loading_action } from "../../Actions/LoadingAction";
+import { toast } from "react-toastify";
 
 export default function EmpLoginComponent(props) {
     // const [state, setState] = useState({username: "", password: "", errorMsgs: "" });
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+
     const navigate = useNavigate();
     const dispatch = useDispatch();
+
+    const emp_data = useSelector((state) => state.emp_login?.data);
+    console.log(emp_data);
+
+    const redirectFrom = useSelector((state) => state.alert_var);
+
+    useEffect(() => {
+        if (redirectFrom?.redirectFrom === "change_password") {
+            toast("Password Changed Successfully, Please Login Again", {
+                position: "top-center",
+            });
+        }
+        if (redirectFrom?.redirectFrom === "reset_password") {
+            toast("Password Changed Successfully, Please Login Again", {
+                position: "top-center",
+            });
+        }
+    }, [redirectFrom])
+
     const constraints = {
         username: {
             presence: {
@@ -58,19 +79,14 @@ export default function EmpLoginComponent(props) {
 
     const HandleForgot = (e) => {
         e.preventDefault();
-    } 
+    }
     const HandleSubmit = async (e) => {
         e.preventDefault();
         let emp_credentials = {
             username: username,
             password: password
         };
-
-       const data = await dispatch(LoginDetails(emp_credentials));
-       console.log(data);
-        // dispatch(is_loading_action(true))
-        // navigate('/home')
-
+        dispatch(LoginDetails(emp_credentials));
     }
 
     return (
@@ -87,7 +103,7 @@ export default function EmpLoginComponent(props) {
                         <div className="form-group row px-2">
                             <label className="label mt-3">User Name</label>
                             <input type="username" name="username" className="form-control col-xs-2 mt-1" value={username}
-                                placeholder="Enter User Name" onChange={(e) => {setUsername(e.target.value)}} autoComplete="off" />
+                                placeholder="Enter User Name" onChange={(e) => { setUsername(e.target.value) }} autoComplete="off" />
                             {/* {errorMsgs.username && (
                                 <small className="form-text text-muted">{errorMsgs.username}</small>
                             )} */}
@@ -95,7 +111,7 @@ export default function EmpLoginComponent(props) {
                         <div className="form-group row px-2">
                             <label
                                 className="label mt-3 font-weight-bold" htmlFor="exampleInputPassword1"> Password</label>
-                            <input type="password" name="password" className="form-control col-xs-2 mt-1" value={password} placeholder="Password" onChange={(e) => {setPassword(e.target.value)}} autoComplete="off" />
+                            <input type="password" name="password" className="form-control col-xs-2 mt-1" value={password} placeholder="Password" onChange={(e) => { setPassword(e.target.value) }} autoComplete="off" />
                             {/* {errorMsgs.password && (
                                 <small className="form-text text-muted">{errorMsgs.password}</small>
                             )} */}

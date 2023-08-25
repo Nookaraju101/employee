@@ -1,13 +1,15 @@
 import { FETCH_ITEMS, LOGIN_ERR } from "../Actions/Constants";
 
-const intialState = {};
+const intialState = {
+    emp_login: {}
+};
 
-export default function (state = intialState, action) {
+export default function (state = {}, action) {
     switch (action?.type) {
         case FETCH_ITEMS: 
          return {
             ...state,
-            emp_login: action.user_info,
+            data: action.user_info?.data,
          };
          case LOGIN_ERR:
             return {

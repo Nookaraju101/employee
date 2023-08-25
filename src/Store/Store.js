@@ -20,6 +20,7 @@ import rootReducer from '../Reducers/RootReducer';
 // }
 
 export default function configureStore(preloadedState) {
+  console.log(preloadedState);
   const middlewares = [thunkMiddleware];
   const middlewareEnhancer = applyMiddleware(...middlewares);
   const store = createStore(rootReducer, preloadedState, composeWithDevTools(middlewareEnhancer));

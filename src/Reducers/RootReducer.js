@@ -2,7 +2,7 @@ import { combineReducers } from "redux";
 import LoaderReducer from "./LoaderReducer";
 import AlertVarReducer from "./AlertVarReducer";
 import LoginReducer from "./LoginReducer";
-
+import { routerReducer } from 'react-router-redux'
 // let newState = {
 // emp_login: {},
 // loader: {},
@@ -10,6 +10,7 @@ import LoginReducer from "./LoginReducer";
 // };
 
 const rootReducer = combineReducers({
+    routing: routerReducer,
     emp_login: LoginReducer,
     loader: LoaderReducer,
     alert_var: AlertVarReducer,
